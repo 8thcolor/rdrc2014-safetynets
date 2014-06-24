@@ -14,3 +14,12 @@ common use case that everybody should easily relate to. Please consider that
 it's not a real application. It's oversimplified as the goal is to support the
 concept of safety nets without digging too deep in each kind of. As
 consequence, some design could be certainly be improved.
+
+## Test
+
+### A simple invoice
+
+An invoice is composed of several items in a certain quantity and with a
+certain price. You can add an item to an invoice. You can get the total
+of an invoice.
+
