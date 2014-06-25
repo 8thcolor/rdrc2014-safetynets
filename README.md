@@ -63,3 +63,9 @@ $ flog lib/invoice.rb
     17.2: Invoice#total                    lib/invoice.rb:13
 
 ```
+
+### A quote
+
+We need now to issue quote as some customers would like to know the price
+before purchasing. A quote is very similar to an invoice except that we
+set the total in advance and it doesn't have items.
