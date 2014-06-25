@@ -69,3 +69,19 @@ $ flog lib/invoice.rb
 We need now to issue quote as some customers would like to know the price
 before purchasing. A quote is very similar to an invoice except that we
 set the total in advance and it doesn't have items.
+
+### Duplication
+
+Copy-pasting is acceptable when working on an implementation. Eventually,
+we need to get rid of any duplicates. It's something we can easily forget.
+Thanks to Flay, we stay aware of all the duplicates present in the
+codebase.
+
+```
+$ flay lib
+Total score (lower is better) = 116
+
+1) IDENTICAL code found in :if (mass*2 = 116)
+  lib/invoice.rb:21
+  lib/quote.rb:10
+```
