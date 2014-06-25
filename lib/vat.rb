@@ -1,8 +1,8 @@
 module Vat
-  def self.rate(country_code = '', vat_number = '')
-    if country_code == 'BE'
+  def self.rate(country, vat_number = '')
+    if country.belgium?
       return 0.21
-    elsif %w(IT FR NL LU DE).include?(country_code)
+    elsif country.europe?
       if is_valid?(vat_number)
         return 0
       else

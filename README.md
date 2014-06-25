@@ -183,3 +183,18 @@ module, we can remove the duplicates:
 $ flay lib/
 Total score (lower is better) = 0
 ```
+
+### Reducing Complexity
+
+By extracting the test of European countries into a dedicate class, we can
+spread the complexity that was already reduced in the previous step:
+```
+34.7: flog total
+ 2.9: flog/method average
+
+ 7.0: Invoice#calculate_subtotal       lib/invoice.rb:28
+ 6.7: Invoice#initialize               lib/invoice.rb:5
+ 5.7: Invoice#total                    lib/invoice.rb:16
+ 4.8: Vat::rate                        lib/vat.rb:2
+
+```
