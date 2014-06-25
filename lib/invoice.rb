@@ -17,7 +17,7 @@ class Invoice
       @total += item.price * item.quantity
     end
 
-    if @country_code == 'BE' && valid_vat_number?
+    if @country_code == 'BE'
       vat = 0.21 * @total
     elsif ['IT','FR','NL','LU','DE'].include?(@country_code)
       if valid_vat_number?

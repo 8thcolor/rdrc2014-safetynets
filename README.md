@@ -49,3 +49,17 @@ pass again.
 Then, as the invoice application is mainly used by Europeans, we decide to
 manage VAT. We add then the necessary logic for: we need a country code and a
 VAT rate.
+
+### Complexity
+
+With Flog we can detect that our very naive implementation is complicated,
+i.e. it's hard to understand, then to change.
+
+```
+$ flog lib/invoice.rb 
+    27.4: flog total
+     5.5: flog/method average
+
+    17.2: Invoice#total                    lib/invoice.rb:13
+
+```
