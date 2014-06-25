@@ -198,3 +198,37 @@ spread the complexity that was already reduced in the previous step:
  4.8: Vat::rate                        lib/vat.rb:2
 
 ```
+
+### Reducing more
+
+We can try to rearrange the condition, but in the end it doesn't improve
+the score:
+
+New Version
+```
+$ flog -d lib/vat.rb 
+     9.1: flog total
+     3.0: flog/method average
+
+     5.9: Vat::rate                        lib/vat.rb:2
+     3.1:   branch
+     1.4:   is_valid?
+     1.2:   !
+     1.2:   europe?
+     1.1:   belgium?
+     1.0:   assignment
+```
+
+Old Version:
+```
+4.8: Vat::rate                        lib/vat.rb:2
+3.3:   branch
+1.2:   is_valid?
+1.1:   europe?
+1.0:   belgium?
+1.0:   assignment
+``` 
+
+Boolean expression could be argued as complex, as it is not straightforward.
+In the end, it depends on you. I find the last version clearer, but it's
+true the previous one has the benefits to explicit the cases.
