@@ -165,3 +165,21 @@ lib/invoice.rb:13:3: C: Method has too many lines. [14/10]
 
 1 file inspected, 2 offenses detected
 ```
+
+## Code Review
+
+Even if static analysis can attract our attention on sensible
+points in our codebase, they don't give you the solution.
+
+However they can feed a Code Review which is a good time to
+spread knowledge and discuss design and refactoring.
+
+### Removing Duplicates
+
+By extracting the calculation of the VAT rate in a dedicated
+module, we can remove the duplicates:
+
+```
+$ flay lib/
+Total score (lower is better) = 0
+```

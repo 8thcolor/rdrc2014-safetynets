@@ -1,3 +1,5 @@
+require 'vat'
+
 class Invoice
   def initialize(country_code = '', vat_number = '')
     @items = []
@@ -13,17 +15,7 @@ class Invoice
   def total
     @total = calculate_subtotal
 
-    if @country_code == 'BE'
-      vat = 0.21 * @total
-    elsif ['IT','FR','NL','LU','DE'].include?(@country_code)
-      if valid_vat_number?
-        vat = 0
-      else
-        vat = 0.21 * @total
-      end
-    else
-      vat = 0
-    end
+    vat = Vat::rate(@country_code, @vat_number) * @total
 
     @total += vat
 
@@ -31,10 +23,6 @@ class Invoice
   end
 
   private
-
-  def valid_vat_number?
-    !@vat_number.empty?
-  end
 
   def calculate_subtotal
     @items.reduce(0) do |total, item|
