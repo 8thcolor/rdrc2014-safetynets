@@ -85,3 +85,9 @@ Total score (lower is better) = 116
   lib/invoice.rb:21
   lib/quote.rb:10
 ```
+
+### A little refactoring
+
+We decide to extract the calculation of the subtotal, before removing the
+duplicates. We do that by adding a dedicated private method. The tests
+are green.

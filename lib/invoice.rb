@@ -11,11 +11,7 @@ class Invoice
   end
 
   def total
-    @total = 0
-    
-    @items.each do |item|
-      @total += item.price * item.quantity
-    end
+    @total = calculate_subtotal
 
     if @country_code == 'BE'
       vat = 0.21 * @total
@@ -38,5 +34,12 @@ class Invoice
 
   def valid_vat_number?
     !@vat_number.empty?
+  end
+
+  def calculate_subtotal
+    total = 0
+    @items.reduce(0) do |total, item|
+      total += item.price * item.quantity
+    end
   end
 end
