@@ -42,3 +42,10 @@ Expected: 105
 We miss to reset the total before calculate it. By doing it, the tests then
 pass again.
 
+## Static Analysis
+
+### Manage European VAT
+
+Then, as the invoice application is mainly used by Europeans, we decide to
+manage VAT. We add then the necessary logic for: we need a country code and a
+VAT rate.

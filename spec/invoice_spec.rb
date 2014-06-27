@@ -30,4 +30,28 @@ describe Invoice do
     item2.quantity = 3
     assert_equal 105, invoice.total
   end
+
+  it 'adds VAT when a valid Belgian VAT number is provided' do
+    invoice = Invoice.new('BE', '123')
+    invoice.add_item(item3)
+    assert_equal 121, invoice.total
+  end
+
+  it 'doesnt add VAT when a valid French VAT number is provided' do
+    invoice = Invoice.new('FR', '123')
+    invoice.add_item(item3)
+    assert_equal 100, invoice.total
+  end
+
+  it 'adds VAT when it is a private French person' do
+    invoice = Invoice.new('FR')
+    invoice.add_item(item3)
+    assert_equal 121, invoice.total
+  end
+
+  it 'doesnt add VAT for a Japanese customer' do
+    invoice = Invoice.new('JP')
+    invoice.add_item(item3)
+    assert_equal 100, invoice.total
+  end
 end
