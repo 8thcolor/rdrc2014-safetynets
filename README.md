@@ -91,3 +91,77 @@ Total score (lower is better) = 116
 We decide to extract the calculation of the subtotal, before removing the
 duplicates. We do that by adding a dedicated private method. The tests
 are green.
+
+### But tests don't catch everything
+
+In the new method, we did a few errors that we can detect with `ruby -w`:
+
+```
+$ ruby -w lib/invoice.rb 
+lib/invoice.rb:41: warning: shadowing outer local variable - total
+lib/invoice.rb:40: warning: assigned but unused variable - total
+```
+
+Rubocop can also detect those problems and even more:
+
+```
+$ rubocop lib/invoice.rb 
+Inspecting 1 file
+W
+
+Offenses:
+
+lib/invoice.rb:1:1: C: Missing top-level class documentation comment.
+class Invoice
+^^^^^
+lib/invoice.rb:13:3: C: Method has too many lines. [14/10]
+  def total
+  ^^^
+lib/invoice.rb:18:11: C: Use %w or %W for array of words.
+    elsif ['IT','FR','NL','LU','DE'].include?(@country_code)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/invoice.rb:18:16: C: Space missing after comma.
+    elsif ['IT','FR','NL','LU','DE'].include?(@country_code)
+               ^
+lib/invoice.rb:18:21: C: Space missing after comma.
+    elsif ['IT','FR','NL','LU','DE'].include?(@country_code)
+                    ^
+lib/invoice.rb:18:26: C: Space missing after comma.
+    elsif ['IT','FR','NL','LU','DE'].include?(@country_code)
+                         ^
+lib/invoice.rb:18:31: C: Space missing after comma.
+    elsif ['IT','FR','NL','LU','DE'].include?(@country_code)
+                              ^
+lib/invoice.rb:40:5: W: Useless assignment to variable - total.
+    total = 0
+    ^^^^^
+lib/invoice.rb:41:26: W: Shadowing outer local variable - total.
+    @items.reduce(0) do |total, item|
+                         ^^^^^
+lib/invoice.rb:42:7: W: Useless assignment to variable - total. Use just operator +.
+      total += item.price * item.quantity
+      ^^^^^
+
+1 file inspected, 10 offenses detected
+```
+
+### Let's fix already some flaws detected by Rubocop
+
+Thanks to Rubocop, we can make the code better. Less risk of bug.
+
+```
+$ rubocop lib/invoice.rb 
+Inspecting 1 file
+C
+
+Offenses:
+
+lib/invoice.rb:1:1: C: Missing top-level class documentation comment.
+class Invoice
+^^^^^
+lib/invoice.rb:13:3: C: Method has too many lines. [14/10]
+  def total
+  ^^^
+
+1 file inspected, 2 offenses detected
+```

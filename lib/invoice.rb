@@ -37,9 +37,8 @@ class Invoice
   end
 
   def calculate_subtotal
-    total = 0
     @items.reduce(0) do |total, item|
-      total += item.price * item.quantity
+      total + item.price * item.quantity
     end
   end
 end
