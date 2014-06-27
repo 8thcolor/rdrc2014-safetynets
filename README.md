@@ -23,3 +23,17 @@ An invoice is composed of several items in a certain quantity and with a
 certain price. You can add an item to an invoice. You can get the total
 of an invoice.
 
+### Promote total local variable to member attribute
+
+Then, we think it would be better to make total local variable a member
+attribute.
+
+But the test fails. We miss something when doing the change.
+
+```
+  1) Failure:
+Invoice#test_0003_returns a correct total even after updating a previously added item [spec/invoice_spec.rb:30]:
+Expected: 105
+  Actual: 195.0
+```
+
