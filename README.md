@@ -37,3 +37,8 @@ Expected: 105
   Actual: 195.0
 ```
 
+### Fix the failure
+
+We miss to reset the total before calculate it. By doing it, the tests then
+pass again.
+

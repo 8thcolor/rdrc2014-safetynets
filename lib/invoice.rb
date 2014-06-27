@@ -9,6 +9,8 @@ class Invoice
   end
 
   def total
+    @total = 0
+
     @items.each do |item|
       @total += item.price * item.quantity
     end
